@@ -12,7 +12,6 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - ./data/pg-data:/var/lib/postgresql/data
-      - ./dev/init_postgres.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - my_network
 
