@@ -1,0 +1,11 @@
+# dbt_project.yml
+name: 'mds_poc' # 必須與 profiles.yml 中的 profile: 名稱一致
+version: '1.0.0'
+config-version: 2
+
+profile: 'mds_poc' # 指向 profiles.yml 中的配置
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+# ... 其他 dbt 配置

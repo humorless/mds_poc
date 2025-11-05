@@ -1,0 +1,42 @@
+version: 1
+default_environment: dev
+project_id: 89a524b2-76d4-4b59-9917-5f995395b9e8
+environments:
+- name: dev
+- name: staging
+- name: prod
+
+plugins:
+# 1. Extractor (Tap) - 改用 tap-smoke-test
+  extractors:
+  - name: tap-smoke-test
+    variant: meltano
+    pip_url: git+https://github.com/meltano/tap-smoke-test.git
+    config:
+      # loop_count 決定了每個內建檔案會循環輸出多少次
+      loop_count: 5
+      # schema_inference_record_count: 確定 schema 的記錄數
+      schema_inference_record_count: 10
+      # streams: 告訴 Tap 讀取哪些內建的 mock data 檔案
+      streams:
+        - stream_name: pageviews # 第一張 Table: 網頁瀏覽數據
+          input_filename: pageviews-data.jsonl
+        - stream_name: animals # 第二張 Table: 模擬動物名錄數據
+          input_filename: animals-data.jsonl   
+# 2. Loader (Target) - 將資料載入到您的 Postgres 服務
+  loaders:
+  - name: target-postgres
+    variant: meltanolabs
+    pip_url: meltanolabs-target-postgres~=0.0.7
+    config:
+        # 關鍵：使用服務名稱 'db' 連線
+      host: db
+      port: 5432
+      user: db_user
+      password: postgres
+      dbname: db
+        # 定義載入的 Schema 名稱
+      default_target_schema: raw
+        # 確保在目標資料庫中建立 schema
+      schema_mapping:
+        tap_gitlab: raw

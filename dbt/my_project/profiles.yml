@@ -1,0 +1,13 @@
+# profiles.yml
+mds_poc:  # 專案名稱，請與 dbt_project.yml 中的 profile: 名稱保持一致
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: db # **關鍵：使用服務名稱連線**
+      port: 5432
+      user: db_user # 來自 db 服務的 POSTGRES_USER
+      pass: postgres # 來自 db 服務的 POSTGRES_PASSWORD
+      dbname: db # 來自 db 服務的 POSTGRES_DB
+      schema: mds_poc # dbt 寫入轉換後資料的預設 schema
+      threads: 4

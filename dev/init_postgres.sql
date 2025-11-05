@@ -1,0 +1,3 @@
+CREATE USER db_user WITH LOGIN PASSWORD 'postgres';
+CREATE DATABASE db OWNER db_user;
+
