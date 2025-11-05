@@ -30,6 +30,10 @@ dbt test
 
 # run single model
 dbt run --select my_new_model
+```
 
+## connect to the Warehouse
 
+```
+psql "postgresql://${USER}:${PASS}@127.0.0.1:5432/${DB}"
 ```
