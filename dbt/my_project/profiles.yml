@@ -4,7 +4,7 @@ mds_poc:  # 專案名稱，請與 dbt_project.yml 中的 profile: 名稱保持�
   outputs:
     dev:
       type: postgres
-      host: db # **關鍵：使用服務名稱連線**
+      host: 127.0.0.1 #When running dbt in host, use host ip
       port: 5432
       user: db_user # 來自 db 服務的 POSTGRES_USER
       pass: postgres # 來自 db 服務的 POSTGRES_PASSWORD
