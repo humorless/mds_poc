@@ -27,7 +27,7 @@ services:
       - MB_DB_PORT=5432
       - MB_DB_USER=db_user
       - MB_DB_PASS=postgres
-      - MB_DB_HOST=db
+      - MB_DB_HOST=db  #db_conn `postgresql://db_user:postgres@db:5432/db`
     depends_on:
       - db
     networks:
